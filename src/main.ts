@@ -2,10 +2,15 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { RemovePasswordItcInterceptor } from './interceptor/remove-password-itc/remove-password-itc.interceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  // pipe
   app.useGlobalPipes(new ValidationPipe());
+  // interceptor
+  app.useGlobalInterceptors(new RemovePasswordItcInterceptor());
 
   const config = new DocumentBuilder()
     .setTitle('Nest API')
