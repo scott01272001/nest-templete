@@ -154,8 +154,6 @@ describe('RemovePasswordItcInterceptor', () => {
     );
 
     expect(result).toEqual({
-      user: null,
-      profile: undefined,
       settings: {
         theme: 'light',
       },

@@ -4,6 +4,7 @@ import { TokenRequestDto, TokenResponseDto, GrantType } from './dto/token.dto';
 import { AuthPipe } from './pipe/auth.pipe';
 import { ConfigService } from '@nestjs/config';
 import { ApiResponse, ApiOperation, ApiBody } from '@nestjs/swagger';
+import { Public } from '../decorator/public-end-point.decorator';
 
 @Controller('auth')
 export class AuthController {
@@ -13,6 +14,7 @@ export class AuthController {
         private readonly configService: ConfigService,
     ) { }
 
+    @Public()
     @ApiOperation({ summary: 'Get access token' })
     @ApiBody({ type: TokenRequestDto })
     @ApiResponse({
