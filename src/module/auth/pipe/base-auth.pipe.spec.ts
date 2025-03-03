@@ -1,13 +1,13 @@
 import { GrantType } from '../dto/token.dto';
 import { ArgumentMetadata, BadRequestException } from '@nestjs/common';
-import { AuthPipe } from './auth.pipe';
+import { BaseAuthPipe } from './base-auth.pipe';
 import { TokenRequestDto } from '../dto/token.dto';
 
-describe('AuthPipe', () => {
-  let pipe: AuthPipe;
+describe('BaseAuthPipe', () => {
+  let pipe: BaseAuthPipe;
 
   beforeEach(() => {
-    pipe = new AuthPipe();
+    pipe = new BaseAuthPipe();
   });
 
   it('should be defined', () => {

@@ -1,10 +1,10 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { TokenRequestDto, TokenResponseDto, GrantType } from './dto/token.dto';
-import { AuthPipe } from './pipe/auth.pipe';
+import { BaseAuthPipe } from './pipe/base-auth.pipe';
 import { ConfigService } from '@nestjs/config';
 import { ApiResponse, ApiOperation, ApiBody } from '@nestjs/swagger';
-import { Public } from '../decorator/public-end-point.decorator';
+import { Public } from '../../decorator/public-end-point.decorator';
 
 @Controller('auth')
 export class AuthController {
@@ -24,7 +24,7 @@ export class AuthController {
     })
     @ApiResponse({ status: 401, description: 'Unauthorized.' })
     @Post('oauth/token')
-    async oauth(@Body(AuthPipe) tokenRequest: TokenRequestDto): Promise<TokenResponseDto> {
+    async oauth(@Body(BaseAuthPipe) tokenRequest: TokenRequestDto): Promise<TokenResponseDto> {
 
         const resp = new TokenResponseDto();
 

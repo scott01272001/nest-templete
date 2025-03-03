@@ -5,7 +5,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { RemovePasswordItcInterceptor } from './interceptor/remove-password-itc/remove-password-itc.interceptor';
 import { JwtAuthenticationGuard } from './guard/jwt-authentication.guard';
 import { JwtService } from '@nestjs/jwt';
-import { UserService } from './user/user.service';
+import { UserService } from './module/user/user.service';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);

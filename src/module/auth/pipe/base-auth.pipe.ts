@@ -2,7 +2,7 @@ import { ArgumentMetadata, BadRequestException, Injectable, PipeTransform } from
 import { TokenRequestDto, GrantType } from '../dto/token.dto';
 
 @Injectable()
-export class AuthPipe implements PipeTransform {
+export class BaseAuthPipe implements PipeTransform {
 
   transform(value: TokenRequestDto, metadata: ArgumentMetadata) {
     if (value.grant_type === GrantType.PASSWORD) {

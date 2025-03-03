@@ -1,7 +1,7 @@
 import { TestingModule, Test } from '@nestjs/testing';
 import { JwtAuthenticationGuard } from './jwt-authentication.guard';
-import { JwtService } from '@nestjs/jwt';
-import { UserService } from '../user/user.service';
+import { JwtModule, JwtService } from '@nestjs/jwt';
+import { UserService } from '../module/user/user.service';
 import { Reflector } from '@nestjs/core';
 
 describe('JwtAuthenticationGuard', () => {
@@ -11,12 +11,22 @@ describe('JwtAuthenticationGuard', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [
-        JwtService,
-        UserService,
-        Reflector
+        JwtModule.register({
+          secret: 'test-secret',
+        })
       ],
       providers: [
-        JwtAuthenticationGuard
+        JwtAuthenticationGuard,
+        Reflector,
+        {
+          provide: UserService,
+          useValue: {
+            findByEmail: jest.fn().mockResolvedValue({
+              email: 'test@example.com',
+              password: 'hashedPassword'
+            })
+          }
+        }
       ]
     }).compile();
 
