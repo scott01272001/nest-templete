@@ -3,6 +3,8 @@ import { User } from './schemas/user.schema';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UserRepository, USER_REPOSITORY } from './repositories/user.repository.interface';
 import * as bcrypt from 'bcrypt';
+import { UserQuery } from './dto/user-query';
+import { PageResponse } from 'src/common/dto/PaginationDto';
 
 @Injectable()
 export class UserService {
@@ -19,9 +21,10 @@ export class UserService {
 
         // Hash password
         const hashedPassword = await bcrypt.hash(createUserDto.password, 10);
+        createUserDto.password = hashedPassword;
 
         // Create new user
-        return this.userRepository.create(createUserDto, hashedPassword);
+        return this.userRepository.create(createUserDto);
     }
 
     async findByEmail(email: string): Promise<User> {
@@ -30,6 +33,10 @@ export class UserService {
             throw new NotFoundException('User not found');
         }
         return user;
+    }
+
+    async findAll(query: UserQuery): Promise<PageResponse<User>> {
+        return this.userRepository.findAll(query);
     }
 
     async validatePassword(user: User, password: string): Promise<boolean> {
