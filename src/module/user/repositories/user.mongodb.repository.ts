@@ -4,7 +4,7 @@ import { Model } from 'mongoose';
 import { User, UserDocument } from '../schemas/user.schema';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { UserRepository } from './user.repository.interface';
-import { PageResponse } from 'src/common/dto/PaginationDto';
+import { PageResponse } from 'src/common/dto/pagination';
 import { UserQuery } from '../dto/user-query';
 
 @Injectable()

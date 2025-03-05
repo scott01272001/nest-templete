@@ -4,7 +4,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UserRepository, USER_REPOSITORY } from './repositories/user.repository.interface';
 import * as bcrypt from 'bcrypt';
 import { UserQuery } from './dto/user-query';
-import { PageResponse } from 'src/common/dto/PaginationDto';
+import { PageResponse } from 'src/common/dto/pagination';
 
 @Injectable()
 export class UserService {

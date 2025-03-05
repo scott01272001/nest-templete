@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { IsArray, IsBoolean, IsString } from "class-validator";
-import { PageRequest } from "src/common/dto/PaginationDto";
+import { PageRequest } from "src/common/dto/pagination";
 
 export class UserQuery extends PageRequest {
 
