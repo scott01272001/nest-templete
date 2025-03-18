@@ -9,7 +9,10 @@ export class RefreshToken {
     @Prop({ required: true, unique: true })
     refreshToken: string;
 
-    @Prop({ required: true })
+    @Prop({
+        required: true,
+        nullable: false
+    })
     userId: string;
 
     @Prop({ required: true })

@@ -118,4 +118,17 @@ describe('UserMongodbRepository', () => {
         });
     });
 
+    describe('findById', () => {
+        it('should find a user by id', async () => {
+            // Arrange
+            const user = await userModel.create({ email: 'user1@example.com', password: 'password', isEmailVerified: true });
+
+            // Act
+            const foundUser = await repository.findById(user._id.toString());
+
+            // Assert
+            expect(foundUser).toBeDefined();
+            expect(foundUser?.email).toBe(user.email);
+        });
+    });
 });

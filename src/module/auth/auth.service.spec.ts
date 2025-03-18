@@ -59,10 +59,10 @@ describe('AuthService', () => {
   });
 
   describe('refreshingAccessToken', () => {
-    it('should create a new access token from a valid refresh token', () => {
+    it('should create a new access token from a valid refresh token', async () => {
       const refreshToken = service.createRefreshToken();
       const createAccessTokenSpy = jest.spyOn(service, 'createAccessToken');
-      const newAccessToken = service.refreshingAccessToken(refreshToken);
+      const newAccessToken = await service.refreshingAccessToken(refreshToken);
       const decoded = jwtService.verify(newAccessToken);
       expect(decoded).toHaveProperty('sub', 1);
       expect(createAccessTokenSpy).toHaveBeenCalled();

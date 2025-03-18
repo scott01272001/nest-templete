@@ -9,4 +9,5 @@ export interface UserRepository {
     findOneByEmail(email: string): Promise<User | null>;
     create(createUserDto: CreateUserDto): Promise<User>;
     findAll(query: UserQuery): Promise<PageResponse<User>>;
+    findById(id: string): Promise<User | null>;
 } 

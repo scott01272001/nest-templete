@@ -59,4 +59,8 @@ export class UserMongodbRepository implements UserRepository {
         };
     }
 
-} 
+    async findById(id: string): Promise<User | null> {
+        return this.userModel.findById(id);
+    }
+
+}

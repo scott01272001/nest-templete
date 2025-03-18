@@ -33,11 +33,11 @@ export class AuthController {
             const accessToken = this.authService.createAccessToken(tokenRequest.username);
             resp.access_token = accessToken;
         } else if (tokenRequest.grant_type === GrantType.REFRESH_TOKEN) {
-            const accessToken = this.authService.refreshingAccessToken(tokenRequest.refresh_token);
+            const accessToken = await this.authService.refreshingAccessToken(tokenRequest.refresh_token);
             resp.access_token = accessToken;
         }
 
-        const refreshToken = this.authService.createRefreshToken();
+        const refreshToken = await this.authService.createRefreshToken();
         resp.refresh_token = refreshToken;
         resp.token_type = 'Bearer';
         resp.expires_in = Number(this.configService.get('auth.jwt.accessToken.expiresIn'));

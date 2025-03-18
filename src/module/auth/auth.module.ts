@@ -3,6 +3,10 @@ import { JwtModule } from '@nestjs/jwt';
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { RefreshTokenMongodbRepository } from './repositories/refresh-token.mongodb.repository';
+import { REFRESH_TOKEN_REPOSITORY } from './repositories/refresh-token.repository.interface';
+import { UserMongodbRepository } from '../user/repositories/user.mongodb.repository';
+import { USER_REPOSITORY } from '../user/repositories/user.repository.interface';
 
 @Module({
   imports: [
@@ -22,7 +26,16 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
       inject: [ConfigService],
     }),
   ],
-  providers: [AuthService],
+  providers: [AuthService,
+    {
+      provide: REFRESH_TOKEN_REPOSITORY,
+      useClass: RefreshTokenMongodbRepository
+    },
+    {
+      provide: USER_REPOSITORY,
+      useClass: UserMongodbRepository
+    }
+  ],
   controllers: [AuthController]
 })
 export class AuthModule { }
